@@ -1,0 +1,32 @@
+# 유저 캐시(key: 1000)
+user cached. key=1000, name=helloworld, exp=1000
+
+# 업데이트 아이템 요청(key: 1000)
+a request for update user item received. key=1000
+joined. userName=helloworld, userExp=1000, requestAmount=10
+
+# Table 결과
+"helloworld가 10를 업데이트 함."
+
+# 업데이트 아이템 요청(key: 2000, 없는 유저에 대한 요청.)
+a request for update user item received. key=2000
+=> join이 안됐으므로 처리가 되진 않음.
+
+# 업데이트 아이템 요청(key: 3000, 없는 유저에 대한 요청.)
+a request for update user item received. key=3000
+=> join이 안됐으므로 처리가 되진 않음.
+
+# 업데이트 아이템 요청(key: 4000, 없는 유저에 대한 요청.)
+a request for update user item received. key=3000
+=> join이 안됐으므로 처리가 되진 않음.
+
+# 유저 캐시(key: 3000, 중간에 밀린 스트림 처리가 될까?)
+user cached. key=3000, name=midstreamtester3, exp=1000
+=> 중간에 join 안된거 처리 안됨.
+
+# 유저 캐시(key: 2000, 중간에 밀린 스트림 처리가 될까?)
+user cached. key=2000, name=plz2000, exp=1000
+=> 이것도 중간에 join 안된거 처리 안됨.
+
+# 업데이트 아이템 요청(key: 3000, 이제 있는 유저에 대한 요청.)
+TODO
