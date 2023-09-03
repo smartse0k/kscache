@@ -49,3 +49,14 @@
   "experience": 0
 }
 ```
+
+# Update Item
+
+## Update User Item
+
+```json
+{
+  "command": "",
+  "amount": 10
+}
+```

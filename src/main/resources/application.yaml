@@ -5,12 +5,17 @@ spring:
     password: root
   cloud:
     function:
-      definition: cacheItem; cacheUser;
+      definition: cacheItem; cacheUser; updateUserItem;
     stream:
       kafka:
         streams:
           binder:
             brokers: localhost:29092
+      bindings:
+        cacheUser-out-0:
+          destination: user-cache-table
+        updateUserItem-in-1:
+          destination: user-cache-table
 logging:
   level:
     org.apache.kafka: warn
