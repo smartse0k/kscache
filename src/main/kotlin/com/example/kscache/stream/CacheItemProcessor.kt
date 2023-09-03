@@ -1,7 +1,7 @@
 package com.example.kscache.stream
 
-import com.example.dto.CacheItemMessage
-import com.example.dto.CacheItemRecord
+import com.example.kscache.dto.CacheItemMessage
+import com.example.kscache.dto.CacheItemRecord
 import org.apache.kafka.streams.kstream.Branched
 import org.apache.kafka.streams.kstream.KStream
 import org.apache.kafka.streams.kstream.KTable
