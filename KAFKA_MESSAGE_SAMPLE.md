@@ -1,6 +1,6 @@
 # Item Amount
 
-## Load
+## Item Amount Load
 
 ```json
 {
@@ -9,7 +9,7 @@
 }
 ```
 
-## Unload
+##Item Amount Unload
 
 ```json
 {
@@ -18,11 +18,34 @@
 }
 ```
 
-## Add
+## Item Amount Add
 
 ```json
 {
   "command": "add",
   "amount": 1
+}
+```
+
+# User
+
+
+## User Load
+
+```json
+{
+  "command": "load",
+  "name": "helloworld",
+  "experience": 1000
+}
+```
+
+## User Unload
+
+```json
+{
+  "command": "unload",
+  "name": "",
+  "experience": 0
 }
 ```
