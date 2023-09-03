@@ -2,16 +2,21 @@ package com.example.kscache.stream
 
 import com.example.kscache.dto.CacheItemMessage
 import com.example.kscache.dto.CacheItemRecord
-import org.apache.kafka.streams.kstream.Branched
-import org.apache.kafka.streams.kstream.KStream
-import org.apache.kafka.streams.kstream.KTable
-import org.apache.kafka.streams.kstream.Named
+import org.apache.kafka.common.serialization.Serdes
+import org.apache.kafka.streams.kstream.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.kafka.support.serializer.JsonDeserializer
+import org.springframework.kafka.support.serializer.JsonSerde
+import org.springframework.kafka.support.serializer.JsonSerializer
 import java.util.function.Consumer
 
 @Configuration
 class CacheItemProcessor {
+    fun ser() = JsonSerializer<CacheItemRecord>()
+    fun des() = JsonDeserializer(CacheItemRecord::class.java)
+    fun serdes() = Serdes.serdeFrom(ser(), des())
+
     @Bean
     fun cacheItem() = Consumer<KStream<String, CacheItemMessage>> { input ->
         val cache: KTable<String, CacheItemRecord> = input.peek { key, value ->
@@ -27,7 +32,7 @@ class CacheItemProcessor {
                         "load" -> {
                             if (prevRecord.isLoaded) {
                                 // 이전 캐시가 로딩이 되었다면 처리를 하지 않는다.
-                                println("load command rejected. write to database. key=${key}, amount=${prevRecord.amount}")
+                                println("load command rejected. already loaded. key=${key}, amount=${prevRecord.amount}")
                                 prevRecord
                             } else {
                                 // 이전 캐시가 로딩되지 않았다면 캐시를 새로 만든다
@@ -66,7 +71,11 @@ class CacheItemProcessor {
                             prevRecord
                         }
                     }
-                }
+                },
+                Materialized.with(
+                    Serdes.String(),
+                    serdes()
+                )
             )
     }
 }
