@@ -5,7 +5,7 @@ user cached. key=1000, name=helloworld, exp=1000
 a request for update user item received. key=1000
 joined. userName=helloworld, userExp=1000, requestAmount=10
 
-# Table 결과
+## 업데이트 아이템 요청 결과
 "helloworld가 10를 업데이트 함."
 
 # 업데이트 아이템 요청(key: 2000, 없는 유저에 대한 요청.)
@@ -29,4 +29,17 @@ user cached. key=2000, name=plz2000, exp=1000
 => 이것도 중간에 join 안된거 처리 안됨.
 
 # 업데이트 아이템 요청(key: 3000, 이제 있는 유저에 대한 요청.)
-TODO
+a request for update user item received. key=3000
+joined. userName=midstreamtester3, userExp=3000, requestAmount=30
+=> 이제 잘 나오는..
+
+## 업데이트 아이템 요청 결과
+"midstreamtester3가 30를 업데이트 함."
+
+# 업데이트 아이템 요청(key: 2000, 이제 있는 유저에 대한 요청.)
+a request for update user item received. key=2000
+joined. userName=plz2000, userExp=1000, requestAmount=12
+=> 이것도 이제 잘 나온다..
+
+## 업데이트 아이템 요청 결과
+plz2000가 12를 업데이트 함.
